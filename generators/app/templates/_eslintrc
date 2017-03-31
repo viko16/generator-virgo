@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "egg",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "spread": true,
+      "rest": true,
+      "experimentalObjectRestSpread": true,
+      "restParams": true
+    }
+  }
+}
