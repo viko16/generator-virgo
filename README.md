@@ -1,5 +1,10 @@
-# generator-virgo [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> Generate a Node.js Application
+# generator-virgo
+
+Generate a Node.js Application
+
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Dependency Status][daviddm-image]][daviddm-url]
 
 ## Installation
 
@@ -28,7 +33,7 @@ yo virgo
 MIT © [viko16](https://github.com/viko16)
 
 
-[npm-image]: https://badge.fury.io/js/generator-virgo.svg
+[npm-image]: https://img.shields.io/npm/v/generator-virgo.svg
 [npm-url]: https://npmjs.org/package/generator-virgo
 [travis-image]: https://travis-ci.org/viko16/generator-virgo.svg?branch=master
 [travis-url]: https://travis-ci.org/viko16/generator-virgo
