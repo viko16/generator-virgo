@@ -1,8 +1,10 @@
 'use strict';
+const path = require('path');
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 const extend = require('deep-extend');
+const _ = require('lodash');
 
 module.exports = class extends Generator {
   initializing() {
@@ -24,7 +26,8 @@ module.exports = class extends Generator {
       name: 'name',
       message: '项目名',
       validate: str => str.trim().length > 0,
-      when: !this.props.name
+      when: !this.props.name,
+      default: _.kebabCase(path.basename(process.cwd()))
     }, {
       type: 'checkbox',
       name: 'chosenFiles',
