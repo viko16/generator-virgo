@@ -33,7 +33,7 @@ describe('Default prompts', () => {
         lint: 'standard'
       },
       devDependencies: {
-        standard: '^9.0.0'
+        standard: '^10.0.0'
       }
     });
   });

@@ -77,7 +77,7 @@ module.exports = class extends Generator {
           lint: 'standard'
         },
         devDependencies: {
-          standard: '^9.0.0'
+          standard: '^10.0.0'
         }
       });
     } else if (chosenLintConfig === 'Egg + React') {
