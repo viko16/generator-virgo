@@ -3,7 +3,6 @@ const path = require('path');
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-const extend = require('deep-extend');
 const _ = require('lodash');
 
 module.exports = class extends Generator {
@@ -48,7 +47,7 @@ module.exports = class extends Generator {
     }];
 
     return this.prompt(prompts).then(props => {
-      this.props = extend(this.props, props);
+      this.props = _.assignIn(this.props, props);
     });
   }
 
@@ -59,7 +58,7 @@ module.exports = class extends Generator {
     const vscodeSettings = {};
 
     // 项目名
-    extend(templatePkg, {
+    _.assignIn(templatePkg, {
       name: this.props.name
     });
 
@@ -73,7 +72,7 @@ module.exports = class extends Generator {
 
     // eslint 配置
     if (chosenLintConfig === 'Standard Style') {
-      extend(templatePkg, {
+      _.assignIn(templatePkg, {
         scripts: {
           lint: 'standard'
         },
@@ -81,11 +80,11 @@ module.exports = class extends Generator {
           standard: '^10.0.0'
         }
       });
-      extend(vscodeSettings, {
+      _.assignIn(vscodeSettings, {
         'standard.enable': true
       });
     } else if (chosenLintConfig === 'Egg + React') {
-      extend(templatePkg, {
+      _.assignIn(templatePkg, {
         scripts: {
           lint: 'eslint .'
         },
@@ -95,7 +94,7 @@ module.exports = class extends Generator {
           'eslint-plugin-react': '^6.10.3'
         }
       });
-      extend(vscodeSettings, {
+      _.assignIn(vscodeSettings, {
         'eslint.enable': true
       });
       this.fs.copy(
