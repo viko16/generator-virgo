@@ -56,6 +56,7 @@ module.exports = class extends Generator {
     const chosenFiles = this.props.chosenFiles;
     const chosenLintConfig = this.props.lintConfig;
     const templatePkg = this.pkg.name ? this.pkg : this.fs.readJSON(this.templatePath('_package.json'), {});
+    const vscodeSettings = {};
 
     // 项目名
     extend(templatePkg, {
@@ -80,6 +81,9 @@ module.exports = class extends Generator {
           standard: '^10.0.0'
         }
       });
+      extend(vscodeSettings, {
+        'standard.enable': true
+      });
     } else if (chosenLintConfig === 'Egg + React') {
       extend(templatePkg, {
         scripts: {
@@ -91,6 +95,9 @@ module.exports = class extends Generator {
           'eslint-plugin-react': '^6.10.3'
         }
       });
+      extend(vscodeSettings, {
+        'eslint.enable': true
+      });
       this.fs.copy(
         this.templatePath('_eslintrc'),
         this.destinationPath('.eslintrc')
@@ -99,6 +106,10 @@ module.exports = class extends Generator {
 
     // 最终写文件
     this.fs.writeJSON(this.destinationPath('package.json'), templatePkg);
+
+    if (!_.isEqual(vscodeSettings, {})) {
+      this.fs.writeJSON(this.destinationPath('.vscode/settings.json'), vscodeSettings);
+    }
   }
 
   end() {

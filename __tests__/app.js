@@ -21,7 +21,8 @@ describe('Default prompts', () => {
     assert.file([
       'package.json',
       '.editorconfig',
-      '.gitignore'
+      '.gitignore',
+      '.vscode/settings.json'
     ]);
     assert.noFile('.eslintrc');
   });
@@ -45,6 +46,10 @@ describe('Default prompts', () => {
   it('.gitignore', () => {
     assert.fileContent('.gitignore', readTemplateFile('_gitignore'));
   });
+
+  it('.vscode/settings.json', () => {
+    assert.jsonFileContent('.vscode/settings.json', { 'standard.enable': true });
+  });
 });
 
 describe('Another eslint config', () => {
@@ -59,7 +64,8 @@ describe('Another eslint config', () => {
       'package.json',
       '.editorconfig',
       '.gitignore',
-      '.eslintrc'
+      '.eslintrc',
+      '.vscode/settings.json'
     ]);
   });
 
@@ -79,5 +85,9 @@ describe('Another eslint config', () => {
 
   it('.eslintrc', () => {
     assert.fileContent('.eslintrc', readTemplateFile('_eslintrc'));
+  });
+
+  it('.vscode/settings.json', () => {
+    assert.jsonFileContent('.vscode/settings.json', { 'eslint.enable': true });
   });
 });
