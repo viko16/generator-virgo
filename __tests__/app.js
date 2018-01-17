@@ -5,10 +5,15 @@ const helpers = require('yeoman-test');
 const fs = require('fs');
 const readTemplateFile = filename => fs.readFileSync(path.resolve(__dirname, '../generators/app/templates', filename), 'utf-8');
 
+const LINT_TYPES = {
+  STANDARD: 'Standard Style',
+  ESLINT: 'Eslint (egg + react)'
+};
+
 const defaultPrompts = {
   name: 'testing project',
-  chosenFiles: ['.editorconfig', '.gitignore'],
-  lintConfig: 'Standard Style'
+  chosenFiles: ['.editorconfig', '.gitignore', 'README.md', 'index.js'],
+  lintConfig: LINT_TYPES.STANDARD
 };
 
 describe('Default prompts', () => {
@@ -22,7 +27,9 @@ describe('Default prompts', () => {
       'package.json',
       '.editorconfig',
       '.gitignore',
-      '.vscode/settings.json'
+      '.vscode/settings.json',
+      'README.md',
+      'index.js'
     ]);
     assert.noFile('.eslintrc');
   });
@@ -34,7 +41,7 @@ describe('Default prompts', () => {
         lint: 'standard'
       },
       devDependencies: {
-        standard: '^10.0.0'
+        standard: '^10'
       }
     });
   });
@@ -54,7 +61,7 @@ describe('Default prompts', () => {
 
 describe('Another eslint config', () => {
   beforeAll(() => {
-    const anotherPrompts = Object.assign({}, defaultPrompts, { lintConfig: 'Egg + React' });
+    const anotherPrompts = Object.assign({}, defaultPrompts, { lintConfig: LINT_TYPES.ESLINT });
     return helpers.run(path.join(__dirname, '../generators/app'))
       .withPrompts(anotherPrompts);
   });
@@ -65,7 +72,9 @@ describe('Another eslint config', () => {
       '.editorconfig',
       '.gitignore',
       '.eslintrc',
-      '.vscode/settings.json'
+      '.vscode/settings.json',
+      'README.md',
+      'index.js'
     ]);
   });
 
@@ -76,9 +85,10 @@ describe('Another eslint config', () => {
         lint: 'eslint .'
       },
       devDependencies: {
-        eslint: '^3.18.0',
-        'eslint-config-egg': '^3.2.0',
-        'eslint-plugin-react': '^6.10.3'
+        'babel-eslint': '^8',
+        eslint: '^4',
+        'eslint-config-egg': '^6',
+        'eslint-plugin-react': '^7'
       }
     });
   });
