@@ -5,6 +5,11 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 const _ = require('lodash');
 
+const LINT_TYPES = {
+  STANDARD: 'Standard Style',
+  ESLINT: 'Eslint (egg + react)'
+};
+
 module.exports = class extends Generator {
   initializing() {
     this.pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
@@ -42,8 +47,8 @@ module.exports = class extends Generator {
       name: 'lintConfig',
       message: '选择你要的 eslint 配置',
       choices: [
-        'Standard Style',
-        'Egg + React',
+        LINT_TYPES.STANDARD,
+        LINT_TYPES.ESLINT,
         'Null'
       ]
     }];
@@ -74,31 +79,34 @@ module.exports = class extends Generator {
     }
 
     // eslint 配置
-    if (chosenLintConfig === 'Standard Style') {
+    if (chosenLintConfig === LINT_TYPES.STANDARD) {
       _.assignIn(templatePkg, {
         scripts: {
           lint: 'standard'
         },
         devDependencies: {
-          standard: '^10.0.0'
+          standard: '^10'
         }
       });
       _.assignIn(vscodeSettings, {
-        'standard.enable': true
+        'standard.enable': true,
+        'standard.autoFixOnSave': true
       });
-    } else if (chosenLintConfig === 'Egg + React') {
+    } else if (chosenLintConfig === LINT_TYPES.ESLINT) {
       _.assignIn(templatePkg, {
         scripts: {
           lint: 'eslint .'
         },
         devDependencies: {
-          eslint: '^3.18.0',
-          'eslint-config-egg': '^3.2.0',
-          'eslint-plugin-react': '^6.10.3'
+          'babel-eslint': '^8',
+          eslint: '^4',
+          'eslint-config-egg': '^6',
+          'eslint-plugin-react': '^7'
         }
       });
       _.assignIn(vscodeSettings, {
-        'eslint.enable': true
+        'eslint.enable': true,
+        'eslint.autoFixOnSave': true
       });
       this.fs.copy(
         this.templatePath('_eslintrc'),

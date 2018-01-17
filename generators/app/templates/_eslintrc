@@ -1,18 +1,18 @@
 {
   "extends": [
-    "egg",
+    "eslint-config-egg",
     "plugin:react/recommended"
   ],
   "plugins": [
     "react"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 6,
-    "ecmaFeatures": {
-      "spread": true,
-      "rest": true,
-      "experimentalObjectRestSpread": true,
-      "restParams": true
-    }
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": 0,
+    "react/prop-types": 0
   }
 }
