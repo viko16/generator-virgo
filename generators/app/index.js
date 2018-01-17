@@ -33,7 +33,9 @@ module.exports = class extends Generator {
       message: '选择你要生成的文件',
       choices: [
         { name: '.editorconfig', checked: true },
-        { name: '.gitignore', checked: true }
+        { name: '.gitignore', checked: true },
+        { name: 'README.md', checked: true },
+        { name: 'index.js', checked: true }
       ]
     }, {
       type: 'list',
@@ -64,9 +66,10 @@ module.exports = class extends Generator {
 
     // 固定的配置文件
     for (const item of chosenFiles) {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath(item.replace(/^\./, '_')),
-        this.destinationPath(item)
+        this.destinationPath(item),
+        { name: this.props.name }
       );
     }
 
