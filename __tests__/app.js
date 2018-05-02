@@ -5,10 +5,7 @@ const helpers = require('yeoman-test');
 const fs = require('fs');
 const readTemplateFile = filename => fs.readFileSync(path.resolve(__dirname, '../generators/app/templates', filename), 'utf-8');
 
-const LINT_TYPES = {
-  STANDARD: 'Standard Style',
-  ESLINT: 'Eslint (egg + react)'
-};
+const { LINT_TYPES } = require('../generators/app/constants');
 
 const defaultPrompts = {
   name: 'testing project',
@@ -16,7 +13,7 @@ const defaultPrompts = {
   lintConfig: LINT_TYPES.STANDARD
 };
 
-describe('Default prompts', () => {
+describe('Default prompts (standard)', () => {
   beforeAll(() => {
     return helpers.run(path.join(__dirname, '../generators/app'))
       .withPrompts(defaultPrompts);
@@ -59,9 +56,9 @@ describe('Default prompts', () => {
   });
 });
 
-describe('Another eslint config', () => {
+describe(LINT_TYPES.ESLINT_EGG_REACT, () => {
   beforeAll(() => {
-    const anotherPrompts = Object.assign({}, defaultPrompts, { lintConfig: LINT_TYPES.ESLINT });
+    const anotherPrompts = Object.assign({}, defaultPrompts, { lintConfig: LINT_TYPES.ESLINT_EGG_REACT });
     return helpers.run(path.join(__dirname, '../generators/app'))
       .withPrompts(anotherPrompts);
   });
@@ -94,7 +91,49 @@ describe('Another eslint config', () => {
   });
 
   it('.eslintrc', () => {
-    assert.fileContent('.eslintrc', readTemplateFile('_eslintrc'));
+    assert.fileContent('.eslintrc', readTemplateFile('_eslintrc_egg_react'));
+  });
+
+  it('.vscode/settings.json', () => {
+    assert.jsonFileContent('.vscode/settings.json', { 'eslint.enable': true });
+  });
+});
+
+describe(LINT_TYPES.ESLINT_EGG, () => {
+  beforeAll(() => {
+    const anotherPrompts = Object.assign({}, defaultPrompts, { lintConfig: LINT_TYPES.ESLINT_EGG });
+    return helpers.run(path.join(__dirname, '../generators/app'))
+      .withPrompts(anotherPrompts);
+  });
+
+  it('creates files', () => {
+    assert.file([
+      'package.json',
+      '.editorconfig',
+      '.gitignore',
+      '.eslintrc',
+      '.vscode/settings.json',
+      'README.md',
+      'index.js'
+    ]);
+  });
+
+  it('package.json', () => {
+    assert.jsonFileContent('package.json', {
+      name: 'testing project',
+      scripts: {
+        lint: 'eslint .'
+      },
+      devDependencies: {
+        'babel-eslint': '^8',
+        eslint: '^4',
+        'eslint-config-egg': '^7'
+      }
+    });
+  });
+
+  it('.eslintrc', () => {
+    assert.fileContent('.eslintrc', readTemplateFile('_eslintrc_egg'));
   });
 
   it('.vscode/settings.json', () => {
