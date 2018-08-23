@@ -20,10 +20,10 @@
     "yeoman-generator"
   ],
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-xo-space": "^0.17.0",
-    "jest": "^22.4.4",
-    "jest-cli": "^22.4.4",
+    "eslint": "^5.4.0",
+    "eslint-config-xo-space": "^0.20.0",
+    "jest": "^23.5.0",
+    "jest-cli": "^23.5.0",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^1.9.1"
   },
@@ -31,7 +31,7 @@
     "chalk": "^2.4.1",
     "generator-node": "^2.4.1",
     "lodash": "^4.17.10",
-    "yeoman-generator": "^2.0.5",
+    "yeoman-generator": "^3.1.1",
     "yosay": "^2.0.2"
   },
   "jest": {
