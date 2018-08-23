@@ -1,18 +1,17 @@
 {
-  "extends": [
-    "eslint-config-egg",
-    "plugin:react/recommended"
-  ],
+  "extends": "eslint-config-egg",
+  "parser": "babel-eslint",
   "plugins": [
     "react"
   ],
-  "parser": "babel-eslint",
   "parserOptions": {
-    "ecmaVersion": 6,
     "sourceType": "module"
   },
   "rules": {
-    "no-console": 0,
-    "react/prop-types": 0
+    "react/jsx-filename-extension": 0,
+    "react/prop-types": 0,
+    "class-methods-use-this": 0,
+    "react/no-array-index-key": 0,
+    "jsx-a11y/anchor-is-valid": 0
   }
 }

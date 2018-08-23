@@ -38,7 +38,7 @@ describe('Default prompts (standard)', () => {
         lint: 'standard'
       },
       devDependencies: {
-        standard: '^10'
+        standard: '^11'
       }
     });
   });
@@ -84,7 +84,7 @@ describe(LINT_TYPES.ESLINT_EGG_REACT, () => {
       devDependencies: {
         'babel-eslint': '^8',
         eslint: '^4',
-        'eslint-config-egg': '^6',
+        'eslint-config-egg': '^7',
         'eslint-plugin-react': '^7'
       }
     });

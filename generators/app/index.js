@@ -83,7 +83,7 @@ module.exports = class extends Generator {
           lint: 'standard'
         },
         devDependencies: {
-          standard: '^10'
+          standard: '^11'
         }
       });
       _.assignIn(vscodeSettings, {
@@ -98,7 +98,7 @@ module.exports = class extends Generator {
         devDependencies: {
           'babel-eslint': '^8',
           eslint: '^4',
-          'eslint-config-egg': '^6',
+          'eslint-config-egg': '^7',
           'eslint-plugin-react': '^7'
         }
       });
